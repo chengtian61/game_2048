@@ -50,6 +50,35 @@ int slide_array(int array[SIZE])
     }
   }
 }
+int rotate(int array[SIZE][SIZE])
+{
+  int i,j,temp;
+  int n=SIZE;
+  for(i=0;i<n/2;i++)
+  {
+      for(j=i;j<n-i-1;j++)
+        {
+            temp=array[i][j];
+            array[i][j]=array[j][n-1-i];
+            array[n-1-i][n-1-j]=array[n-1-j][i];
+            array[n-1-j][i]=temp;
+        }
+  }
+}
+int move_up(int array[SIZE][SIZE])
+{
+   int i;
+   for(i=0;i<SIZE;i++)
+     slide_array(array[i]);
+}
+int move_left(int array[SIZE][SIZE])
+{
+    rotate(array);
+    rotate(array);
+    rotate(array);
+    move_up(array);
+    rotate(array);
+}
 
 int main()
 {
@@ -64,12 +93,11 @@ int main()
     }
      printf("\n");
    }
-   for(i=0;i<SIZE;i++)
-      slide_array(board[i]);
+   move_left(array)
    printf("\nafter:\n");
-   for(i=0;i<4;i++)
+   for(j=0;j<4;j++)
    {
-     for(j=0;j<4;j++)
+     for(i=0;i<4;i++)
     {
        printf("%5d",board[i][j]);
     }
